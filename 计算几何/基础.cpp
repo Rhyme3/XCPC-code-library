@@ -19,3 +19,17 @@ int sgn(ld x)
 }
 point operator + (const point& a, const point& b) { return point(a.x + b.x, a.y + b.y); }
 point operator - (const point& a, const point& b) { return point(a.x - b.x, a.y - b.y); }
+point operator * (const point& a, ld k) { return point(a.x * k, a.y * k); }
+point operator / (const point& a, ld k) { return point(a.x / k, a.y / k); }
+inline bool operator < (const point& a, const point& b)
+{
+    return sgn(a.x - b.x) < 0 || (sgn(a.x - b.x) == 0 && sgn(a.y - b.y) < 0);
+}
+bool operator == (const point& a, const point& b)
+{
+    return !sgn(a.x - b.x) && !sgn(a.y - b.y);
+}
+ld dist(const point& p) { return sqrt(p.x * p.x + p.y * p.y); } //直线距离
+ld dot(const point& a, const point& b) { return a.x * b.x + a.y * b.y; } //点积投影
+ld det(const point& a, const point& b) { return a.x * b.y - a.y * b.x; } //叉积面积
+ld cross(const point& s, const point& t, const point& o = point()) { return det(s - o, t - o); } //面积和夹角··
